@@ -1,0 +1,29 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - echo "start Creating an image with dockerfile"
+  - docker build -t hoijookim/docker-react-app -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true hoijookim/docker-react-app npm run test -- --coverage
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: ap-northeast-2
+  app: docker-react-app
+  env: Dockerreactapp-env
+  bucket-name: elasticbeanstalk-ap-northeast-2-847236324905
+  bucket-path: docker-react-app
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+
+
+
