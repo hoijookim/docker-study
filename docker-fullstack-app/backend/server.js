@@ -9,12 +9,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 테이블 생성
-db.pool.query(
-  'CREATE TABLE lists (id INTEGER AUTO INCREMENT, value TEXT, PRIMARY KEY (id))',
-  (err, results, fields) => {
-    console.log('results', results);
-  }
-);
+// db.pool.query(
+//   'CREATE TABLE lists (id INTEGER AUTO INCREMENT, value TEXT, PRIMARY KEY (id))',
+//   (err, results, fields) => {
+//     console.log('results', results);
+//   }
+// );
 
 // DB lists 테이블에 있는 모든 데이터를 프론트에 전달
 app.get('/api/values', (req, res, next) => {
